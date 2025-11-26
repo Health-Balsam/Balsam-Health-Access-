@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>لوحة التحكم — المنصة الصحية</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body dir="rtl" class="theme">
+  <header class="topbar">
+    <div class="brand small">
+      <img src="assets/logo-alghad.png" alt="كلية الغد" />
+      <div class="title"><h1>لوحة التحكم</h1><small>إدارة المنشآت والطلبات</small></div>
+    </div>
+    <div class="tools">
+      <button id="backBtn" onclick="location.href='index.html'">الواجهة</button>
+    </div>
+  </header>
+
+  <main class="container admin">
+    <section class="manage">
+      <h2>المنشآت والعيادات</h2>
+      <div class="manage-row">
+        <input id="newFacilityName" placeholder="اسم المنشأة (مثال: مجمع بلسم الجنوب)" />
+        <button id="addFacilityBtn">أضف منشأة</button>
+      </div>
+
+      <div id="facilitiesList" class="facilities"></div>
+    </section>
+
+    <section class="requests">
+      <h2>طلبات الخدمة الذاتية</h2>
+      <div class="requests-tools">
+        <button id="exportCsv">تصدير CSV</button>
+        <button id="clearAll">حذف الكل</button>
+      </div>
+      <table id="requestsTable">
+        <thead><tr><th>الوقت</th><th>المنشأة</th><th>العيادة</th><th>الاسم</th><th>الهوية</th><th>ملف</th><th>حذف</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+<script src="app.js"></script>
+</body>
+</html>

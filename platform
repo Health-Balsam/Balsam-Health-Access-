@@ -1,0 +1,8 @@
+platform/
+  ├─ index.html         <-- الواجهة (المستخدم/الجوال/الكمبيوتر)
+  ├─ admin.html         <-- لوحة التحكم (المدراء)
+  ├─ styles.css
+  ├─ app.js
+  └─ assets/
+       ├─ logo-alghad.png    <-- شعار كلية الغد (ضع الصورة هنا)
+       └─ logo-balsam.png    <-- شعار مجمع بلسم الجنوب (اختياري)

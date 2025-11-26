@@ -1,0 +1,37 @@
+:root{
+  --blue1:#E6F2FF;
+  --blue2:#BEE6FF;
+  --accent:#5FB0FF;
+  --text:#1a2b3c;
+  --card:#ffffffcc;
+}
+*{box-sizing:border-box;font-family: "Segoe UI", Tahoma, Arial, sans-serif;}
+body.theme{background:linear-gradient(180deg,var(--blue1),var(--blue2));color:var(--text);margin:0;min-height:100vh;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:transparent}
+.brand{display:flex;gap:12px;align-items:center}
+.brand img{height:54px}
+.brand.small img{height:44px}
+.title h1{margin:0;font-size:20px}
+.title small{color:#3b4b5c}
+.tools{display:flex;gap:8px;align-items:center}
+.tools button, .adminLink{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;text-decoration:none}
+.container{display:flex;gap:20px;padding:20px;align-items:flex-start;max-width:1100px;margin:12px auto}
+.kiosk{flex:2;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.06)}
+.info{flex:1;background:var(--card);padding:18px;border-radius:12px}
+label{display:block;margin-top:12px;font-weight:600}
+input[type=text], select{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:6px}
+.actions{display:flex;gap:10px;margin-top:14px}
+button#submitBtn{background:#0b76d1;color:#fff;border:none;padding:10px 16px;border-radius:8px}
+button#printBtn{background:#fff;border:1px solid #0b76d1;padding:10px 12px;border-radius:8px;color:#0b76d1}
+.confirmation{padding:12px;background:#f0fff7;border:1px solid #e0f7ef;border-radius:8px;margin-top:12px}
+.footer{margin-top:20px;font-size:13px;color:#254b6a}
+.admin .manage, .admin .requests{background:var(--card);padding:12px;border-radius:10px;margin-bottom:12px}
+.manage-row{display:flex;gap:8px}
+.facilities .facility{display:flex;gap:8px;align-items:center;padding:8px;border-bottom:1px dashed #eee}
+.facilities button{padding:6px 8px;border-radius:6px;border:1px solid #ccc;background:#fff}
+table{width:100%;border-collapse:collapse}
+table th, table td{padding:8px;border-bottom:1px solid #eee;text-align:center}
+@media (max-width:800px){
+  .container{flex-direction:column;padding:12px}
+  .tools{flex-direction:row-reverse}
+}

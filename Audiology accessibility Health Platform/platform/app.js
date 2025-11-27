@@ -3,7 +3,7 @@ const DEFAULT_DATA = {
   facilities: [
     { id: "balsam", name_ar: "مجمع بلسم الجنوب الطبي", name_en: "Balsam Al-Janoub Medical Complex",
       clinics: [
-        "الطوارئ","الباطنية","النساء والولادة","العلاج الطبيعي","الجلدية","الأطفال","الأشعة","المختبر"
+        "الطوارئ","الباطنية","الأسنان","النساء والولادة","العلاج الطبيعي","الجلدية","الأطفال","الأشعة","المختبر"
       ]
     }
   ],
@@ -248,4 +248,5 @@ function initAdminUI(){
 
   renderFacilities();
   renderRequests();
+
 }

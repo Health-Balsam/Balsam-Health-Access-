@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>صفحة الاستقبال</title>
 
+<style>
+    body {
+        font-family: "Tajawal", sans-serif;
+        background: #f5f7fa;
+        direction: rtl;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #2b6777;
+    }
+
+    .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px #0002;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: right;
+    }
+
+    table th {
+        background: #2b6777;
+        color: #fff;
+    }
+
+    .btn-clear {
+        background: #d9534f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+</style>
+
+</head>
+<body>
+
+<h1>📋 بيانات الحجوزات – صفحة الاستقبال</h1>
+
+<div class="card">
+    <table id="requestsTable">
+        <thead>
+            <tr>
+                <th>الوقت</th>
+                <th>المنشأة</th>
+                <th>العيادة</th>
+                <th>اسم المراجع</th>
+                <th>رقم الهوية</th>
+                <th>رقم الجوال</th>
+                <th>رقم الملف</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button class="btn-clear" onclick="clearRequests()">🗑 مسح السجل</button>
+</div>
+
+<script>
+    const STORAGE_KEY = "signedmed_platform_v1";
+
+    function loadData() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { requests: [] };
+        try { return JSON.parse(raw); }
+        catch { return { requests: [] }; }
+    }
+
+    function renderRequests() {
+        const data = loadData();
+        const tbody = document.querySelector("#requestsTable tbody");
+        tbody.innerHTML = "";
+
+        if (!data.requests || data.requests.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align:center">لا توجد بيانات</td></tr>`;
+            return;
+        }
+
+        data.requests.forEach(r => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${r.time}</td>
+                <td>${r.facility}</td>
+                <td>${r.clinic}</td>
+                <td>${r.name}</td>
+                <td>${r.id}</td>
+                <td>${r.phone || "-"}</td>
+                <td>${r.file || "-"}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function clearRequests() {
+        if (!confirm("هل تريد حذف جميع البيانات؟")) return;
+        const data = loadData();
+        data.requests = [];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        renderRequests();
+    }
+
+    renderRequests();
+</script>
+
+</body>
+</html>

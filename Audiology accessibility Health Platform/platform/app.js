@@ -250,5 +250,6 @@ function initAdminUI(){
   renderRequests();
 
 }
+<Route path="/reception" element={<ReceptionPage />} />
 
 

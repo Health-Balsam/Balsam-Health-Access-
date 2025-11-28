@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title></title> بوابــــة الخدمــة الذاتيـــة   </title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body dir="rtl" class="theme">
+  <header class="topbar">
+    <div class="brand">
+     
+      <div class="title">
+        <h1 id="appTitle">المنصة الصحية لذوي الإعاقة السمعية الصم</h1>
+        <small id="subtitle">تحسين تجربة مريض الصم داخل المنشأة الصحية ودعم الخدمة الذاتية</small>
+      </div>
+    </div>
+    <div class="tools">
+      <button id="langToggle">EN</button>
+      <a class="adminLink" href="admin.html" target="_blank">لوحة التحكم</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="kiosk">
+      <h2 id="kioskTitle">جهاز الخدمة الذاتية</h2>
+
+      <form id="kioskForm">
+        <label id="labelFacility">اختر المنشأة الصحية</label>
+        <select id="facilitySelect"></select>
+
+        <label id="labelClinic">اختر العيادة</label>
+        <select id="clinicSelect"></select>
+
+        <label id="labelName">اسم المريض</label>
+        <input id="patientName" type="text" placeholder="الاسم الكامل" required />
+
+        <label id="labelId">رقم الهوية / الإقامة</label>
+        <input id="patientId" type="text" placeholder="مثال: 1234567890" required />
+        <label id="labelPhone">رقم الجوال</label>
+        <input id="phoneNumber" type="tel" placeholder="05XXXXXXXX" required />
+
+        <label id="labelFile">رقم الملف (إذا وُجد)</label>
+        <input id="fileNumber" type="text" placeholder="رقم الملف" />
+
+        <div class="actions">
+          <button type="submit" id="submitBtn">تأكيد الحجز</button>
+          <button type="button" id="printBtn">عرض/طباعة</button>
+        </div>
+      </form>
+
+      <div id="confirmation" class="confirmation" hidden>
+        <h3 id="confTitle">تم إرسال الطلب</h3>
+        <p id="confText"></p>
+      </div>
+    </section>
+
+    <aside class="info">
+      <h3 id="helpTitle">إرشادات</h3>
+      <ul id="helpList">
+        <li>اتبع التعليمات على الشاشة لإتمام الخدمة.</li>
+        <li>ستحصل على رقم زمني للمراجعة داخل العيادة.</li>
+        <li>يوفر النظام لوحات إرشادية ومحتوى مرئي بلغة الإشارة في أماكن الانتظار.</li>
+      </ul>
+      <footer class="footer">
+        <p></p> جميع الحقوق محفوظة لكلية الغد بنجران2025 </p>
+      </footer>
+    </aside>
+  </main>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

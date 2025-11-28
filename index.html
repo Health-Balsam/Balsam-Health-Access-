@@ -1,81 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title></title> بوابــــة الخدمــة الذاتيـــة   </title>
-<link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>صفحة الاستقبال</title>
+
+<style>
+    body {
+        font-family: "Tajawal", sans-serif;
+        background: #f5f7fa;
+        direction: rtl;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #2b6777;
+    }
+
+    .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 10px #0002;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: right;
+    }
+
+    table th {
+        background: #2b6777;
+        color: #fff;
+    }
+
+    .btn-clear {
+        background: #d9534f;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+</style>
+
 </head>
-<body dir="rtl" class="theme">
-  <header class="topbar">
-    <div class="brand">
-     
-      <div class="title">
-        <h1 id="appTitle">المنصة الصحية لذوي الإعاقة السمعية الصم</h1>
-        <small id="subtitle">تحسين تجربة مريض الصم داخل المنشأة الصحية ودعم الخدمة الذاتية</small>
-      </div>
-    </div>
-    <div class="tools">
-      <button id="langToggle">EN</button>
-      <a class="adminLink" href="admin.html" target="_blank">لوحة التحكم</a>
-    </div>
-  </header>
+<body>
 
-  <main class="container">
-    <section class="kiosk">
-      <h2 id="kioskTitle">جهاز الخدمة الذاتية</h2>
+<h1>📋 بيانات الحجوزات – صفحة الاستقبال</h1>
 
-      <form id="kioskForm">
-        <label id="labelFacility">اختر المنشأة الصحية</label>
-        <select id="facilitySelect"></select>
+<div class="card">
+    <table id="requestsTable">
+        <thead>
+            <tr>
+                <th>الوقت</th>
+                <th>المنشأة</th>
+                <th>العيادة</th>
+                <th>اسم المراجع</th>
+                <th>رقم الهوية</th>
+                <th>رقم الجوال</th>
+                <th>رقم الملف</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 
-        <label id="labelClinic">اختر العيادة</label>
-        <select id="clinicSelect"></select>
+    <button class="btn-clear" onclick="clearRequests()">🗑 مسح السجل</button>
+</div>
 
-        <label id="labelName">اسم المريض</label>
-        <input id="patientName" type="text" placeholder="الاسم الكامل" required />
+<script>
+    const STORAGE_KEY = "signedmed_platform_v1";
 
-        <label id="labelId">رقم الهوية / الإقامة</label>
-        <input id="patientId" type="text" placeholder="مثال: 1234567890" required />
-        <label id="labelPhone">رقم الجوال</label>
-        <input id="phoneNumber" type="tel" placeholder="05XXXXXXXX" required />
+    function loadData() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { requests: [] };
+        try { return JSON.parse(raw); }
+        catch { return { requests: [] }; }
+    }
 
-        <label id="labelFile">رقم الملف (إذا وُجد)</label>
-        <input id="fileNumber" type="text" placeholder="رقم الملف" />
+    function renderRequests() {
+        const data = loadData();
+        const tbody = document.querySelector("#requestsTable tbody");
+        tbody.innerHTML = "";
 
-        <div class="actions">
-          <button type="submit" id="submitBtn">تأكيد الحجز</button>
-          <button type="button" id="printBtn">عرض/طباعة</button>
-        </div>
-      </form>
+        if (!data.requests || data.requests.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align:center">لا توجد بيانات</td></tr>`;
+            return;
+        }
 
-      <div id="confirmation" class="confirmation" hidden>
-        <h3 id="confTitle">تم إرسال الطلب</h3>
-        <p id="confText"></p>
-      </div>
-    </section>
+        data.requests.forEach(r => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${r.time}</td>
+                <td>${r.facility}</td>
+                <td>${r.clinic}</td>
+                <td>${r.name}</td>
+                <td>${r.id}</td>
+                <td>${r.phone || "-"}</td>
+                <td>${r.file || "-"}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
 
-    <aside class="info">
-      <h3 id="helpTitle">إرشادات</h3>
-      <ul id="helpList">
-        <li>اتبع التعليمات على الشاشة لإتمام الخدمة.</li>
-        <li>ستحصل على رقم زمني للمراجعة داخل العيادة.</li>
-        <li>يوفر النظام لوحات إرشادية ومحتوى مرئي بلغة الإشارة في أماكن الانتظار.</li>
-      </ul>
-      <footer class="footer">
-        <p></p> جميع الحقوق محفوظة لكلية الغد بنجران2025 </p>
-      </footer>
-    </aside>
-  </main>
+    function clearRequests() {
+        if (!confirm("هل تريد حذف جميع البيانات؟")) return;
+        const data = loadData();
+        data.requests = [];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        renderRequests();
+    }
 
-<script src="app.js"></script>
+    renderRequests();
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
